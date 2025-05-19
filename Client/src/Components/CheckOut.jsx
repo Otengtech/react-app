@@ -37,7 +37,7 @@ const CheckOut = () => {
     setSuccess(false);
 
     try {
-      const res = await axios.post("https://sneekers-4.onrender.com/api/pay", {
+      const res = await axios.post("https://react-app-307l.onrender.com/api/pay", {
         ...formData,
         totalAmount, // should be in Naira, converted to kobo in backend
       });

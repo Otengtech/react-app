@@ -9,7 +9,7 @@ const Footer = () => {
   const handleSubscribe = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://sneekers-4.onrender.com/subscribe", {
+      const res = await axios.post("https://react-app-307l.onrender.com/subscribe", {
         email: subscriber,
       });
       setSubMessage(res.data.message);

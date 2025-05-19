@@ -20,9 +20,11 @@ dotenv.config();
 const app = express();
 const PORT = 5000;
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 // Middlewares
 app.use(cors({
-  origin: 'https://sneekers-frontend.onrender.com',
+  origin: `${backendUrl}`,
   credentials: true
 }));
 app.use(express.json());
