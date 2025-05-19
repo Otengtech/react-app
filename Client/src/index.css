@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* ✅ Hide scrollbar globally (Root) */
+
+
+ body::-webkit-scrollbar {
+    display: none;
+  }
