@@ -23,6 +23,7 @@ const __dirname = path.dirname(__filename);
 
 // ---------- Middleware ----------
 app.use(helmet());
+app.use(cors());
 app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }));
 app.use(express.json());
 app.use(bodyParser.json());
