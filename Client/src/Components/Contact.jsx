@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Loader from "./Loader";
 import Footer from "./Footer";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const Contact = () => {
   const [loader, setLoader] = useState(false);
@@ -17,7 +18,7 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:5000/send-email", {
+      const res = await fetch(`${API_URL}/send-email`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const Footer = () => {
   const [subscriber, setSubscriber] = useState("");
@@ -9,7 +10,7 @@ const Footer = () => {
   const handleSubscribe = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://react-app-307l.onrender.com/subscribe", {
+      const res = await axios.post(`${API_URL}/subscribe`, {
         email: subscriber,
       });
       setSubMessage(res.data.message);

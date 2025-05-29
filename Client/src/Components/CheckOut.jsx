@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const CheckOut = () => {
   const [formData, setFormData] = useState({
@@ -37,7 +38,7 @@ const CheckOut = () => {
     setSuccess(false);
 
     try {
-      const res = await axios.post("https://react-app-307l.onrender.com/api/pay", {
+      const res = await axios.post(`${API_URL}/api/pay`, {
         ...formData,
         totalAmount, // should be in Naira, converted to kobo in backend
       });
