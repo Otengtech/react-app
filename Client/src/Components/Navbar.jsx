@@ -139,7 +139,7 @@ const Navbar = ({ cart, userName, setUserName, userEmail, setUserEmail }) => {
 
                 <Link to="/adminpanel" className="w-full">
                   <button 
-                  onclick={()=>{
+                  onClick={()=>{
                     setAccountMenu(false)
                   }}
                   className="w-full mt-2 py-2 bg-white/20 hover:bg-white/30 text-white rounded-full transition duration-200 text-sm">

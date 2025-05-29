@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "../App.css";
+import shoeImg from "../assets/shoe1.png"
 
 const Hero = () => {
   const messages = [
@@ -72,7 +73,7 @@ const Hero = () => {
 
         {/* Shoe image stays centered */}
         <img
-          src="images/shoe1.png"
+          src={shoeImg}
           alt="Sports Shoe"
           className="w-[400px] object-contain drop-shadow-2xl z-10 animate-float"
         />
