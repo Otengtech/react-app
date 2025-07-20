@@ -17,6 +17,7 @@ import CheckOut from "./CheckOut.jsx";
 import AdminPanel from "./AdminPanel.jsx";
 import FAQ from "./FAQ.jsx";
 import MoveTop from "./MoveTop.jsx";
+import ScrollToTop from "./ScrollToTop.jsx";
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -99,6 +100,7 @@ const App = () => {
         <Loader />
       ) : (
         <div className="scroll-smooth">
+          <ScrollToTop />
           <Navbar
             cart={cart}
             setCart={setCart}

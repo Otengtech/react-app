@@ -416,6 +416,7 @@ const Home = forwardRef((props, ref) => {
           </form>
         </div>
       </section>
+      
       {/* Testimonials */}
       <section className="py-20 px-6 bg-gray-900">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-1 gap-16 items-center">
@@ -479,7 +480,7 @@ const Home = forwardRef((props, ref) => {
                 reviews.map((item) => (
                   <div
                     key={item.id}
-                    className="shrink-0 h-64 overflow-y-auto block bg-gray-200 mx-4 w-80 rounded-2xl p-6 hover:scale-105 transition-transform duration-300 snap-center"
+                    className="shrink-0 h-64 overflow-y-auto hide-scrollbar block bg-gray-200 mx-4 w-80 rounded-2xl p-6 hover:scale-105 transition-transform duration-300 snap-center"
                   >
                     <div className="flex block items-center gap-4 mb-2">
                       <img

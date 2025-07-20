@@ -23,8 +23,24 @@ const __dirname = path.dirname(__filename);
 
 // ---------- Middleware ----------
 app.use(helmet());
-app.use(cors());
-app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }));
+
+// ✅ Allow localhost and Vercel frontend
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://react-app-rho-olive.vercel.app'
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true
+}));
+
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -47,7 +63,7 @@ const Order = mongoose.model('Order', new mongoose.Schema({
 
 // ---------- Routes ----------
 
-// ✅ Test route
+// ✅ Test Route
 app.get('/', (req, res) => {
   res.send('✅ Backend server is running!');
 });
@@ -79,7 +95,7 @@ app.post("/send-email", async (req, res) => {
   }
 });
 
-// ✅ Newsletter
+// ✅ Newsletter Subscription
 app.post("/subscribe", async (req, res) => {
   const { email } = req.body;
   try {
@@ -130,7 +146,7 @@ app.post("/api/pay", async (req, res) => {
       }
     );
 
-    // Save initial order to DB (optional)
+    // Save initial order to DB
     await new Order({
       fullName,
       email,
