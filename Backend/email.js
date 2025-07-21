@@ -22,22 +22,30 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // ---------- Middleware ----------
-app.use(helmet());
-app.options('*', cors());
-app.use(express.json());
-app.use(cors({
-  origin: ['https://react-app-7wev.onrender.com'],
-  credentials: true
-}));
 
-app.use(express.json());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(helmet());
 app.use(morgan('dev'));
 app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// ✅ Fix CORS Configuration
+app.use(cors({
+  origin: 'https://react-app-7wev.onrender.com', // ✅ No trailing slash!
+  credentials: true,
+}));
+
+// ✅ Handle Preflight Requests for all routes
+app.options('*', cors({
+  origin: 'https://react-app-7wev.onrender.com',
+  credentials: true,
+}));
 
 // ---------- MongoDB ----------
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
   .then(() => console.log('✅ MongoDB connected'))
   .catch(err => console.error('❌ MongoDB Error:', err));
 
@@ -70,7 +78,7 @@ app.post("/send-email", async (req, res) => {
     });
 
     const mailOptions = {
-      from: process.env.USER_EMAIL,
+      from: process.env.EMAIL_USER,
       to: "otengebenezer326@gmail.com",
       subject: `Message from ${name}`,
       text: `Email: ${email}\n\n${message}`
@@ -97,7 +105,7 @@ app.post("/subscribe", async (req, res) => {
     });
 
     const mailOptions = {
-      from: process.env.USER_EMAIL,
+      from: process.env.EMAIL_USER,
       to: "otengebenezer326@gmail.com",
       subject: "New Newsletter Subscriber",
       text: `A new user has subscribed: ${email}`,
