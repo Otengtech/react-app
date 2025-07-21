@@ -24,20 +24,8 @@ const __dirname = path.dirname(__filename);
 // ---------- Middleware ----------
 app.use(helmet());
 
-// ✅ Allow localhost and Vercel frontend
-const allowedOrigins = [
-  'http://localhost:5173',
-  'https://react-app-rho-olive.vercel.app'
-];
-
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
+  origin: ['https://react-app-7wev.onrender.com/'],
   credentials: true
 }));
 
