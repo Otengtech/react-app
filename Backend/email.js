@@ -23,9 +23,10 @@ const __dirname = path.dirname(__filename);
 
 // ---------- Middleware ----------
 app.use(helmet());
-
+app.options('*', cors());
+app.use(express.json());
 app.use(cors({
-  origin: ['https://react-app-7wev.onrender.com/'],
+  origin: ['https://react-app-7wev.onrender.com'],
   credentials: true
 }));
 
