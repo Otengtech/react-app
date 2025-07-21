@@ -31,15 +31,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // ✅ Fix CORS Configuration
 app.use(cors({
-  origin: 'https://react-app-7wev.onrender.com', // ✅ No trailing slash!
-  credentials: true,
+  origin: 'https://react-app-7wev.onrender.com', // your frontend domain
+  methods: ['GET', 'POST'],
+  credentials: true
 }));
 
-// ✅ Handle Preflight Requests for all routes
-app.options('*', cors({
-  origin: 'https://react-app-7wev.onrender.com',
-  credentials: true,
-}));
 
 // ---------- MongoDB ----------
 mongoose.connect(process.env.MONGO_URI, {
@@ -47,7 +43,7 @@ mongoose.connect(process.env.MONGO_URI, {
   useUnifiedTopology: true
 })
   .then(() => console.log('✅ MongoDB connected'))
-  .catch(err => console.error('❌ MongoDB Error:', err));
+  .catch(err => console.error('❌ MongoDB Error:', err))
 
 // ---------- Order Schema ----------
 const Order = mongoose.model('Order', new mongoose.Schema({
