@@ -28,43 +28,36 @@ const App = () => {
   const [review, setReview] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
 
-  const [totalAmount, setTotalAmount] = useState(
-    parseFloat(localStorage.getItem("totalAmount")) || 0
-  );
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const storedAmount = parseFloat(localStorage.getItem("totalAmount")) || 0;
-      setTotalAmount(storedAmount);
-    };
-
-    // Listen to storage updates
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoader(false);
-    }, 1000);
-  }, []);
-
+  // ✅ Initialize cart from localStorage
   const [cart, setCart] = useState(() => {
     const storedCart = localStorage.getItem("cartItems");
     return storedCart ? JSON.parse(storedCart) : [];
   });
 
-  // This lets any component re-sync from localStorage
+  // ✅ Sync cart to localStorage and compute totalAmount
+  const [totalAmount, setTotalAmount] = useState(0);
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cart));
+
+    const total = cart.reduce(
+      (acc, item) => acc + Number(item.price || 0) * (item.quantity || 1),
+      0
+    );
+    setTotalAmount(total);
+    localStorage.setItem("totalAmount", total.toFixed(2));
+  }, [cart]);
+
   const refreshCartFromLocalStorage = () => {
     const updatedCart = JSON.parse(localStorage.getItem("cartItems")) || [];
     setCart(updatedCart);
   };
-  const sneakersSectionRef = useRef(null);
 
+  const sneakersSectionRef = useRef(null);
   const handleScrollToSneakers = () => {
     sneakersSectionRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  // Load username/email from localStorage
   useEffect(() => {
     const storedUserName = localStorage.getItem("userName");
     const storedUserEmail = localStorage.getItem("userEmail");
@@ -72,6 +65,7 @@ const App = () => {
     if (storedUserEmail) setUserEmail(storedUserEmail);
   }, []);
 
+  // Load products from Firestore
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -81,10 +75,6 @@ const App = () => {
           ...doc.data(),
         }));
         setProducts(items);
-        // Set only cart items in localStorage
-        const storedCart = localStorage.getItem("cartItems");
-        const initialCart = storedCart ? JSON.parse(storedCart) : [];
-        setCart(initialCart);
         setOriginalProducts(items);
       } catch (error) {
         console.error("Error fetching data", error);
@@ -92,6 +82,12 @@ const App = () => {
     };
 
     fetchData();
+  }, []);
+
+  // Loader
+  useEffect(() => {
+    const timer = setTimeout(() => setLoader(false), 1000);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -117,7 +113,6 @@ const App = () => {
               element={
                 <>
                   <Hero handleScrollToSneakers={handleScrollToSneakers} />
-                  {/* <div className="h-[500px]" /> */}
                   <MoveTop />
                   <HomeProducts
                     ref={sneakersSectionRef}
@@ -149,7 +144,6 @@ const App = () => {
             />
             <Route path="/contact" element={<Contact />} />
             <Route path="/faq" element={<FAQ />} />
-
             <Route
               path="/adminpanel"
               element={

@@ -25,14 +25,14 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-black text-white py-12 px-6">
+    <footer className="bg-black text-white pt-12 pb-6 px-6">
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
 
         {/* Brand Info */}
         <div>
           <h2 className="text-2xl font-bold text-yellow-500 mb-4">Sneekers</h2>
           <p className="text-gray-400">
-            Welcome to <span className="text-yellow-500 font-semibold">Sneekers</span>, your go-to
+            Welcome to Sneekers, your go-to
             destination for authentic, trendy, and premium sneakers. Style meets comfort here.
           </p>
         </div>
@@ -119,11 +119,10 @@ const Footer = () => {
       {/* Copyright */}
       <div className="text-center mt-12 border-t border-gray-500 py-4 text-gray-400 text-sm">
         <p>
-          &copy; {new Date().getFullYear()}{" "}
-          <span className="text-white font-semibold">Sneekers</span>. All rights reserved.
+          &copy; {new Date().getFullYear()}{" "}Sneekers. All rights reserved.
         </p>
         <p>
-          <span className="text-yellow-600 mt-6">Designed By Oteng Siaw Ebenezer</span>
+          <span className="text-yellow-400 mt-10">Designed By Oteng Siaw Ebenezer</span>
         </p>
       </div>
     </footer>

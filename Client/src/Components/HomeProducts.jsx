@@ -34,6 +34,10 @@ const Home = forwardRef((props, ref) => {
     }
   };
 
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cart));
+  }, [cart]);
+
   const addToCart = (product) => {
     if (cart.some((item) => item.id === product.id)) {
       toast.info("Item already in cart!", {
@@ -41,14 +45,14 @@ const Home = forwardRef((props, ref) => {
         autoClose: 1000,
       });
       return;
-    } else {
-      setCart([...cart, product]);
-      toast.success(`${product.name} added to cart! 🛒`, {
-        position: "top-right",
-        theme: "dark",
-        autoClose: 1000,
-      });
     }
+    const updatedCart = [...cart, { ...product, quantity: 1 }];
+    setCart(updatedCart);
+    toast.success(`${product.name} added to cart! 🛒`, {
+      position: "top-right",
+      theme: "dark",
+      autoClose: 1000,
+    });
   };
 
   const scrollRef = useRef(null);
@@ -125,7 +129,7 @@ const Home = forwardRef((props, ref) => {
       setEmail("");
       setMessage("");
       setImage(null);
-      setPreviewUrl(null)
+      setPreviewUrl(null);
     } catch (err) {
       console.error("Error adding review:", err);
       toast.error("Error adding review", { autoClose: 1000 });
@@ -231,7 +235,7 @@ const Home = forwardRef((props, ref) => {
             {products.slice(0, 6).map((item) => (
               <div
                 key={item.id}
-                className="flex flex-col bg-gray-100 block rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 transform hover:scale-105"
+                className="flex flex-col bg-gray-100 block rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition duration-300 transform hover:scale-105"
               >
                 {/* Product Image */}
                 <div className="bg-white p-4 flex block items-center justify-center">
@@ -416,7 +420,7 @@ const Home = forwardRef((props, ref) => {
           </form>
         </div>
       </section>
-      
+
       {/* Testimonials */}
       <section className="py-20 px-6 bg-gray-900">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-1 gap-16 items-center">
@@ -505,7 +509,7 @@ const Home = forwardRef((props, ref) => {
                         <i key={i} className="mx-1 block fa-solid fa-star" />
                       ))}
                     </div>
-                    
+
                     <p className="text-gray-800 text-xs">
                       {item.timestamp?.toDate().toLocaleString()}
                     </p>
