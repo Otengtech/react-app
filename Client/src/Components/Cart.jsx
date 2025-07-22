@@ -156,7 +156,7 @@ const Cart = ({ cart, setCart }) => {
             {/* Checkout Section */}
             {cart.length > 0 && (
               <div className="w-full lg:w-1/3">
-                <div className="sticky top-6 p-6 text-center bg-gray-700 rounded-lg shadow-xl">
+                <div className="sticky top-6 p-6 md:h-full flex flex-col items-center justify-center text-center bg-gray-700 rounded-lg shadow-xl">
                   <h2 className="text-yellow-500 text-4xl font-bold">
                     Checkout
                   </h2>

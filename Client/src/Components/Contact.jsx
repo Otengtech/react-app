@@ -57,8 +57,8 @@ const Contact = () => {
             {/* Contact Info */}
             <div className="grid md:grid-cols-2 gap-16 max-w-6xl mx-auto items-center text-left">
               <div className="space-y-6 text-gray-200">
-                <h2 className="text-3xl font-bold">Get in Touch</h2>
-                <p>Our team is available Monday to Friday, 9 AM – 6 PM GMT.</p>
+                <h2 className="text-3xl font-bold text-yellow-500">Get in Touch</h2>
+                <p>Our team is available at all times.</p>
                 <div className="space-y-4">
                   <p className="flex items-center gap-3">
                     <i className="fa-solid fa-envelope text-xl text-yellow-500"></i>
@@ -89,7 +89,6 @@ const Contact = () => {
                 </h3>
                 <div className="space-y-4">
                   <div>
-                    <label htmlFor="name" className="block text-gray-200 mb-1">Your Name</label>
                     <input
                       type="text"
                       name="name"
@@ -103,7 +102,6 @@ const Contact = () => {
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="block text-gray-200 mb-1">Your Email</label>
                     <input
                       type="email"
                       name="email"
@@ -117,7 +115,6 @@ const Contact = () => {
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-gray-200 mb-1">Your Message</label>
                     <textarea
                       name="message"
                       id="message"
