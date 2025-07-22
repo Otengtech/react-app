@@ -3,6 +3,7 @@ import Loader from "./Loader";
 import Footer from "./Footer";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import LatestSneakers from "./LatestSneakers";
 
 const AllSneakers = ({
   products,
@@ -150,6 +151,8 @@ const AllSneakers = ({
             </div>
           </div>
 
+          <LatestSneakers />
+
           {/* Sneakers Section */}
           <div className="w-full px-6 bg-gray-900 sm:px-10 md:px-20 lg:px-32 pb-32 pt-10 mx-auto text-center space-y-8">
             <button
@@ -287,7 +290,7 @@ const AllSneakers = ({
                       </p>
                       <div className="mt-4 text-lg font-bold text-gray-800">
                         GH<i className="fa-solid fa-cedi-sign"></i>{" "}
-                        {(selectedProduct.price || 0).toFixed(2)}
+                        {(Number(selectedProduct.price) || 0).toFixed(2)}
                       </div>
                       <div className="mt-4">
                         <button

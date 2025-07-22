@@ -19,24 +19,6 @@ const features = [
     description:
       "We stay ahead of the curve so you can too. Discover fresh, on-trend designs that match your vibe and elevate your street style.",
   },
-  {
-    icon: "fa-truck-fast",
-    title: "Fast & Free Shipping",
-    description:
-      "No more waiting weeks for your kicks. We process orders quickly and deliver straight to your doorstep — fast, free, and hassle-free.",
-  },
-  {
-    icon: "fa-shield-heart",
-    title: "Customer Satisfaction",
-    description:
-      "Your happiness is our mission. With a dedicated support team and easy returns, shopping with us is stress-free and satisfying.",
-  },
-  {
-    icon: "fa-recycle",
-    title: "Eco-Friendly Approach",
-    description:
-      "We're committed to sustainability. From eco-conscious packaging to responsibly sourced materials, we’re stepping up for the planet.",
-  },
 ];
 
 const ChooseUs = () => {

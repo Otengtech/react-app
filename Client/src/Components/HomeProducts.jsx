@@ -8,6 +8,7 @@ import "../App.css";
 import ChooseUs from "./ChooseUs";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import LatestSneakers from "./LatestSneakers";
 
 const Home = forwardRef((props, ref) => {
   const { products, cart, setCart } = props;
@@ -218,6 +219,8 @@ const Home = forwardRef((props, ref) => {
           ))}
         </div>
       </section>
+
+      <LatestSneakers />
 
       <section className="py-28 px-4 bg-white text-center">
         <h2 className="text-4xl sm:text-6xl block my-6 font-bold block text-yellow-500">
@@ -469,7 +472,7 @@ const Home = forwardRef((props, ref) => {
               Reviews
             </div>
             <div
-              className="custom-scrollbar flex overflow-x-auto space-x-6 py-8 snap-x snap-mandatory cursor-grab active:cursor-grabbing"
+              className="custom-scrollbar flex overflow-x-auto space-x-6 py-8 snap-x snap-mandatory"
               ref={scrollRef}
               onMouseDown={handleMouseDown}
               onMouseMove={handleMouseMove}
