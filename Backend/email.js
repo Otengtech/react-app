@@ -26,14 +26,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // CORS
-const allowedOrigins = ['https://react-app-7wev.onrender.com']; 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://react-app-7wev.onrender.com"
+];
 
 app.use(cors({
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
-      callback(new Error('Not allowed by CORS'));
+      callback(new Error("CORS not allowed from this origin"));
     }
   },
   credentials: true,
