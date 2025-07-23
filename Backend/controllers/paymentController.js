@@ -31,7 +31,9 @@ export const initializePayment = async (req, res) => {
     }).save();
 
     res.status(200).json({
-      authorization_url: response.data.data.authorization_url
+      data: {
+        authorization_url: response.data.data.authorization_url
+      }
     });
   } catch (err) {
     console.error('Payment Error:', err.response?.data || err.message);

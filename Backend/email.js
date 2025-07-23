@@ -13,6 +13,8 @@ import paymentRoutes from './routes/paymentRoutes.js';
 import uploadImageRoutes from './routes/uploadImageRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
 
+app.options("*", cors());
+
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
