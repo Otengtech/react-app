@@ -13,8 +13,6 @@ import paymentRoutes from './routes/paymentRoutes.js';
 import uploadImageRoutes from './routes/uploadImageRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
 
-app.options("*", cors());
-
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -32,7 +30,7 @@ const allowedOrigins = [
   "http://localhost:5173",
   "https://react-app-7wev.onrender.com"
 ];
-
+app.options("*", cors());
 app.use(cors({
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
