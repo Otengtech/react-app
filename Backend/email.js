@@ -30,7 +30,6 @@ const allowedOrigins = [
   "http://localhost:5173",
   "https://react-app-7wev.onrender.com"
 ];
-app.options("*", cors());
 app.use(cors({
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
@@ -42,6 +41,7 @@ app.use(cors({
   credentials: true,
 }));
 
+app.options("*", cors());
 // ---------- Connect DB ----------
 connectDB();
 
