@@ -40,7 +40,7 @@ const CheckOut = () => {
     setSuccess(false);
 
     try {
-      const res = await axios.post(`${API_URL}/api/pay`, {
+      const res = await axios.post(`https://react-app-backend-ppf7.onrender.com/api/pay`, {
         ...formData,
         totalAmount: Math.floor(Number(totalAmount) * 100), // send amount in kobo (for Paystack)
       });
