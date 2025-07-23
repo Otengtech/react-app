@@ -10,7 +10,7 @@ const Footer = () => {
   const handleSubscribe = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${API_URL}/subscribe`, {
+      const res = await axios.post(`${API_URL}/api/subscribe`, {
         email: subscriber,
       });
       setSubMessage(res.data.message);
