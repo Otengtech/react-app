@@ -13,7 +13,7 @@ const deliveryFees = {
   "Cape Coast": 45,
 };
 
-const CheckOut = () => {
+const CheckOut = ({userName, userEmail}) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullName: "",
@@ -33,14 +33,8 @@ const CheckOut = () => {
     const savedTotal = localStorage.getItem("totalAmount");
     if (savedTotal) setBaseTotal(savedTotal);
 
-    const user = JSON.parse(localStorage.getItem("user"));
-    if (user && user.email) {
+    if (userName && userEmail) {
       setIsLoggedIn(true);
-      setFormData((prev) => ({
-        ...prev,
-        fullName: user.fullName || "",
-        email: user.email || "",
-      }));
     } else {
       setIsLoggedIn(false);
     }

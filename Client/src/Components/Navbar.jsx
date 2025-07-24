@@ -7,12 +7,16 @@ const Navbar = ({ cart, userName, setUserName, userEmail, setUserEmail }) => {
   const [accountMenu, setAccountMenu] = useState(false);
   const [activeLink, setActiveLink] = useState("");
   const [active, setActive] = useState("none");
+  const [profileImage, setProfileImage] = useState(null);
 
   useEffect(() => {
     const savedName = localStorage.getItem("userName");
     const savedEmail = localStorage.getItem("userEmail");
+    const savedImage = localStorage.getItem("profileImage");
+
     if (savedName) setUserName(savedName);
     if (savedEmail) setUserEmail(savedEmail);
+    if (savedImage) setProfileImage(savedImage);
   }, []);
 
   useEffect(() => {
@@ -21,12 +25,19 @@ const Navbar = ({ cart, userName, setUserName, userEmail, setUserEmail }) => {
     } else {
       localStorage.removeItem("userName");
     }
+
     if (userEmail) {
       localStorage.setItem("userEmail", userEmail);
     } else {
       localStorage.removeItem("userEmail");
     }
-  }, [userName, userEmail]);
+
+    if (profileImage) {
+      localStorage.setItem("profileImage", profileImage);
+    } else {
+      localStorage.removeItem("profileImage");
+    }
+  }, [userName, userEmail, profileImage]);
 
   useEffect(() => {
     setActive(userName !== "" ? "flex" : "none");
@@ -39,6 +50,17 @@ const Navbar = ({ cart, userName, setUserName, userEmail, setUserEmail }) => {
   const handleLinkClick = (linkPath) => {
     setActiveLink(linkPath);
     setMenuOpen(false);
+  };
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setProfileImage(reader.result); // Base64 string
+    };
+    reader.readAsDataURL(file);
   };
 
   return (
@@ -58,7 +80,7 @@ const Navbar = ({ cart, userName, setUserName, userEmail, setUserEmail }) => {
 
         <div className="flex items-center justify-center space-x-5 animate-fade-in-up">
           <ul className="hidden md:flex lg:flex items-center justify-center space-x-5 text-md text-gray-200">
-            {["/", "/allsneakers","/gallery", "/contact", "/about", "/policy"].map(
+            {["/", "/allsneakers", "/gallery", "/contact", "/about", "/policy"].map(
               (path, idx) => {
                 const labels = [
                   "Home",
@@ -87,10 +109,7 @@ const Navbar = ({ cart, userName, setUserName, userEmail, setUserEmail }) => {
           </ul>
 
           <Link to="/cart">
-            <div
-              className="relative animate-fade-in-up"
-              onClick={setActiveFalse}
-            >
+            <div className="relative animate-fade-in-up" onClick={setActiveFalse}>
               <i className="fa-solid text-yellow-500 text-xl cursor-pointer fa-bag-shopping"></i>
               <span className="absolute -top-2 -right-3 flex items-center justify-center w-5 h-5 text-sm rounded-full bg-gray-200">
                 {totalItems}
@@ -107,6 +126,7 @@ const Navbar = ({ cart, userName, setUserName, userEmail, setUserEmail }) => {
               className="animate-fade-in-up text-white text-xl cursor-pointer fa-solid fa-user"
             ></i>
 
+            {/* ACCOUNT MENU */}
             <div
               className={`absolute top-14 right-4 z-50 rounded-xl p-5 w-64 backdrop-blur-md bg-yellow-500/90 shadow-xl ring-1 ring-yellow-400 transition-all duration-300 ease-in-out transform ${
                 accountMenu
@@ -115,9 +135,29 @@ const Navbar = ({ cart, userName, setUserName, userEmail, setUserEmail }) => {
               }`}
             >
               <div className="flex flex-col items-center space-y-2 text-white">
-                <div className="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center text-2xl font-semibold shadow-inner">
-                  {userName ? userName.charAt(0).toUpperCase() : "G"}
+                <div className="relative">
+                  {profileImage ? (
+                    <img
+                      src={profileImage}
+                      alt="Profile"
+                      className="w-16 h-16 rounded-full object-cover shadow-inner border-2 border-white"
+                    />
+                  ) : (
+                    <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center text-2xl font-semibold shadow-inner">
+                      {userName ? userName.charAt(0).toUpperCase() : "G"}
+                    </div>
+                  )}
+                  <label className="absolute -bottom-2 -right-2 cursor-pointer bg-white rounded-full p-1 shadow-md hover:bg-gray-100">
+                    <i className="fa-solid fa-camera text-yellow-500 text-sm"></i>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      className="hidden"
+                    />
+                  </label>
                 </div>
+
                 <div className="font-bold text-lg">{userName || "Guest"}</div>
                 <div className="text-sm text-center text-gray-100">
                   {userEmail || "No email provided"}
@@ -128,9 +168,9 @@ const Navbar = ({ cart, userName, setUserName, userEmail, setUserEmail }) => {
                     onClick={() => {
                       setUserName("");
                       setUserEmail("");
-                      localStorage.removeItem("userName");
-                      localStorage.removeItem("userEmail");
-                      setAccountMenu(false)
+                      setProfileImage(null);
+                      localStorage.clear();
+                      setAccountMenu(false);
                     }}
                     className="w-full mt-3 py-2 bg-gray-900 hover:bg-gray-800 text-white rounded-full transition duration-200"
                   >
@@ -139,11 +179,10 @@ const Navbar = ({ cart, userName, setUserName, userEmail, setUserEmail }) => {
                 </Link>
 
                 <Link to="/adminpanel" className="w-full">
-                  <button 
-                  onClick={()=>{
-                    setAccountMenu(false)
-                  }}
-                  className="w-full mt-2 py-2 bg-white/20 hover:bg-white/30 text-white rounded-full transition duration-200 text-sm">
+                  <button
+                    onClick={() => setAccountMenu(false)}
+                    className="w-full mt-2 py-2 bg-white/20 hover:bg-white/30 text-white rounded-full transition duration-200 text-sm"
+                  >
                     Dashboard
                   </button>
                 </Link>
@@ -166,13 +205,14 @@ const Navbar = ({ cart, userName, setUserName, userEmail, setUserEmail }) => {
         </div>
       </div>
 
+      {/* MOBILE MENU */}
       <div
         className={`z-50 fixed top-16 mt-3 left-0 w-full text-yellow-500 bg-gray-900 transition-transform duration-500 ease-in-out ${
           menuOpen ? "translate-x-0 h-screen" : "-translate-x-full h-screen"
         }`}
       >
         <ul className="flex flex-col justify-center mt-4 animate-fade-in-up">
-          {["/", "/allsneakers","/gallery", "/contact", "/about", "/policy", "/faq"].map(
+          {["/", "/allsneakers", "/gallery", "/contact", "/about", "/policy", "/faq"].map(
             (path, idx) => {
               const labels = [
                 "Home",

@@ -163,7 +163,13 @@ const App = () => {
             />
             <Route
               path="/checkout"
-              element={<CheckOut totalAmount={totalAmount} />}
+              element={
+                <CheckOut
+                  totalAmount={totalAmount}
+                  userEmail={userEmail}
+                  userName={userName}
+                />
+              }
             />
             <Route
               path="/about"
