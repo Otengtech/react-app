@@ -58,11 +58,12 @@ const Navbar = ({ cart, userName, setUserName, userEmail, setUserEmail }) => {
 
         <div className="flex items-center justify-center space-x-5 animate-fade-in-up">
           <ul className="hidden md:flex lg:flex items-center justify-center space-x-5 text-md text-gray-200">
-            {["/", "/allsneakers", "/contact", "/about", "/policy"].map(
+            {["/", "/allsneakers","/gallery", "/contact", "/about", "/policy"].map(
               (path, idx) => {
                 const labels = [
                   "Home",
                   "Shop Now",
+                  "Our Gallery",
                   "Contact",
                   "About",
                   "Privacy Policy",
@@ -171,11 +172,12 @@ const Navbar = ({ cart, userName, setUserName, userEmail, setUserEmail }) => {
         }`}
       >
         <ul className="flex flex-col justify-center mt-4 animate-fade-in-up">
-          {["/", "/allsneakers", "/contact", "/about", "/policy", "/faq"].map(
+          {["/", "/allsneakers","/gallery", "/contact", "/about", "/policy", "/faq"].map(
             (path, idx) => {
               const labels = [
                 "Home",
                 "Shop Now",
+                "Our Gallery",
                 "Contact",
                 "About",
                 "Privacy Policy",

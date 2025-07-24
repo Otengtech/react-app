@@ -43,7 +43,8 @@ const About = () => {
                 everyday streetwear staples, we curate the finest collection for
                 sneakerheads and style lovers alike. Whether you're a collector,
                 athlete, or fashion-forward individual, you'll find the perfect
-                fit with us.
+                fit with us. In addition, this website was developed solely by a Student 
+                at Koforidua Technical University by the name Ebenezer Oteng.
               </p>
             </div>
 

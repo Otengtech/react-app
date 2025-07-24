@@ -18,6 +18,7 @@ import AdminPanel from "./AdminPanel.jsx";
 import FAQ from "./FAQ.jsx";
 import MoveTop from "./MoveTop.jsx";
 import ScrollToTop from "./ScrollToTop.jsx";
+import Gallery from "./Gallery.jsx";
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -142,6 +143,7 @@ const App = () => {
                 />
               }
             />
+            <Route path="gallery" element={<Gallery />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/faq" element={<FAQ />} />
             <Route

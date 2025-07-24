@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Loader from "./Loader"; // Assumes a loader component exists
+import Footer from "./Footer";
 
 const Cart = ({ cart, setCart }) => {
   const [loader, setLoader] = useState(false);
@@ -180,6 +181,7 @@ const Cart = ({ cart, setCart }) => {
           </div>
         </>
       )}
+      <Footer />
     </div>
   );
 };
